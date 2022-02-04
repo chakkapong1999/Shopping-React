@@ -16,7 +16,6 @@ export default class ApiService {
 
   handleRequest(config) {
     const state = store.getState();
-    console.log(state.user)
     const token = state.user.token
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;

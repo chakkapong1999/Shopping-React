@@ -51,7 +51,7 @@ export default function LoginPage() {
           dispatch(setUsername(response.username));
           dispatch(setToken(response.token));
           dispatch(setIsLoggedIn(response.success));
-          navigate("/home", {replace: false})
+          navigate("/home", {replace: true})
         } else {
           alert("NOT SUCCESS");
         }
