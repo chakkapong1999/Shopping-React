@@ -1,4 +1,5 @@
 import axios from "axios";
+import { store } from "../stores/index"
 
 const URL = "http://localhost:8000";
 
@@ -14,7 +15,9 @@ export default class ApiService {
   }
 
   handleRequest(config) {
-    const token = "maxtest123456";
+    const state = store.getState();
+    console.log(state.user)
+    const token = state.user.token
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
     }

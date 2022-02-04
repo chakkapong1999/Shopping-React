@@ -3,6 +3,8 @@ import { Button, Form, Container, Card, Modal } from "react-bootstrap";
 import "./LoginPage.css";
 import { api } from "../services/index";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUsername, setToken, setIsLoggedIn } from "../stores/userStore"
 
 export default function LoginPage() {
   const [usernameLogin, setUsernameLogin] = useState("");
@@ -12,7 +14,7 @@ export default function LoginPage() {
   const [show, setShow] = useState(false);
 
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
 
   const handleUsernameLogin = (event) => {
     setUsernameLogin(event.target.value);
@@ -46,7 +48,9 @@ export default function LoginPage() {
       })
       .then((response) => {
         if (response.success) {
-          // alert("SUCCESS");
+          dispatch(setUsername(response.username));
+          dispatch(setToken(response.token));
+          dispatch(setIsLoggedIn(response.success));
           navigate("/home", {replace: false})
         } else {
           alert("NOT SUCCESS");
