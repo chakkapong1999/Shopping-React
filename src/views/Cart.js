@@ -4,7 +4,9 @@ export default function Cart() {
   return (
     <div>
       <Navigation />
-      Cart
+      <div className="card w-100 h-100 mt-5">
+        <p>CART</p>
+      </div>
     </div>
   );
 }
