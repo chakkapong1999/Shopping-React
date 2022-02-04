@@ -56,7 +56,7 @@ export default function LoginPage() {
           alert("NOT SUCCESS");
         }
       });
-  }, [passwordLogin, usernameLogin]);
+  }, [dispatch, navigate, passwordLogin, usernameLogin]);
 
   const handleCreateUser = useCallback(async () => {
     api
