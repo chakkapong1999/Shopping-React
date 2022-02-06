@@ -1,12 +1,14 @@
 import React from "react";
 import Navigation from "../components/Navigation";
+import { useSelector } from "react-redux";
 export default function Cart() {
+
+  const itemInCart = useSelector(state => state.product)
+
   return (
     <div>
       <Navigation />
-      <div className="card w-100 h-100 mt-5">
-        <p>CART</p>
-      </div>
+      <p>CART</p>
     </div>
   );
 }

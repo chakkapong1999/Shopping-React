@@ -21,7 +21,7 @@ export default function HomePage() {
       <Container>
         <div className="grid">
           {products.map((product) => {
-            return <Item data={product} />;
+            return <Item data={product} key={product.id} />;
           })}
         </div>
       </Container>
