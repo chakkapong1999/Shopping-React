@@ -10,7 +10,7 @@ export default function Navigation() {
 
   return (
     <div>
-      <Navbar bg="dark" variant="dark">
+      <Navbar bg="dark" variant="dark" style={{paddingLeft: 20}}>
         <Navbar.Brand as={Link} to="/">
           SHOPPING
         </Navbar.Brand>
