@@ -18,8 +18,8 @@ export default function Item(props) {
     <div className="card w-100 h-100 mt-5">
       <img src={props.data.image} className="card-img-top" alt="" />
       <div className="card-body">
-        <h5 className="card-title">{props.data.message}</h5>
-        <p className="card-text">{props.data.name}</p>
+        <h5 className="card-title">{props.data.name}</h5>
+        <p className="card-text">฿{props.data.price}</p>
         <Button variant="secondary" onClick={() => handleAddItem(props.data)}>
           ADD ITEM
         </Button>{" "}

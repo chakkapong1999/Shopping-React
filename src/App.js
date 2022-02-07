@@ -3,6 +3,7 @@ import LoginPage from "./views/LoginPage";
 import About from "./views/About";
 import HomePage from "./views/HomePage";
 import Cart from "./views/Cart";
+import Confirm from "./views/Confirm";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/about" element={<About />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/confirm" element={<Confirm />} />
       </Routes>
     </div>
   );

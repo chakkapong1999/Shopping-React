@@ -1,16 +1,34 @@
 import React from "react";
 import Navigation from "../components/Navigation";
-import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
 import { Container, Table, Button } from "react-bootstrap";
 import { BsPlus } from "react-icons/bs";
 import { BiMinus } from "react-icons/bi";
+import { addProduct, removeItem } from "../stores/productStore";
 
 export default function Cart() {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const isLoggedIn = user.isLoggedIn;
+  const navigate = useNavigate();
 
   const itemInCart = useSelector((state) => state.product.cart);
+  const totalPrice = useSelector((state) => {
+    let total = 0;
+    state.product.cart.forEach((element) => {
+      total += element.product.price * element.amount;
+    });
+    return total;
+  });
+
+  const handleAddItem = (data) => {
+    dispatch(addProduct(data));
+  };
+
+  const handleRemoveItem = (data) => {
+    dispatch(removeItem(data));
+  };
 
   if (!isLoggedIn) {
     return <Navigate to="/" replace />;
@@ -18,13 +36,14 @@ export default function Cart() {
     return (
       <div>
         <Navigation />
-        <Container className="mt-5">
+        <Container className="mt-5 mx-auto">
           <Table bordered>
             <thead>
               <tr>
                 <th>Name</th>
                 <th>Price</th>
                 <th>Amount</th>
+                <th>Total Price</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -33,13 +52,20 @@ export default function Cart() {
                 return (
                   <tr key={value.product.id}>
                     <td>{value.product.name}</td>
-                    <td>{value.product.price}</td>
+                    <td>฿{value.product.price}</td>
                     <td>{value.amount}</td>
+                    <td>฿{value.product.price * value.amount}</td>
                     <td>
-                      <Button variant="danger">
+                      <Button
+                        variant="danger"
+                        onClick={() => handleRemoveItem(value)}
+                      >
                         <BiMinus />
                       </Button>{" "}
-                      <Button variant="warning">
+                      <Button
+                        variant="warning"
+                        onClick={() => handleAddItem(value)}
+                      >
                         <BsPlus />
                       </Button>{" "}
                     </td>
@@ -48,6 +74,9 @@ export default function Cart() {
               })}
             </tbody>
           </Table>
+          <Button variant="success" onClick={() => navigate("/confirm")}>
+            ชำระเงิน ฿{totalPrice}
+          </Button>
         </Container>
       </div>
     );

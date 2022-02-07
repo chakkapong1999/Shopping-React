@@ -18,11 +18,21 @@ const productSlice = createSlice({
         state.cart.push(action.payload);
       }
     },
+    removeItem: (state, action) => {
+      const removeItem = state.cart.find((value) => {
+        return value.product.id === action.payload.product.id
+      })
+      if(removeItem.amount > 1) {
+        removeItem.amount -= 1;
+      } else {
+        removeItem.amount = 0
+      }
+    },
     resetCart: (state) => {
       state.cart = [];
     },
   },
 });
 
-export const { addProduct } = productSlice.actions;
+export const { addProduct, removeItem, resetCart } = productSlice.actions;
 export default productSlice.reducer;
