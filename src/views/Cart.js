@@ -75,7 +75,7 @@ export default function Cart() {
             </tbody>
           </Table>
           <Button variant="success" onClick={() => navigate("/confirm")}>
-            ชำระเงิน ฿{totalPrice}
+            ยืนยันการชำระเงิน ฿{totalPrice}
           </Button>
         </Container>
       </div>
