@@ -1,11 +1,13 @@
 import React from "react";
-import { Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav, Dropdown } from "react-bootstrap";
 import { BsGear } from "react-icons/bs";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function Navigation() {
+  const user = useSelector((state) => state.user);
+  const isLoggedIn = user.isLoggedIn;
   const itemInCart = useSelector((state) => {
     let total = 0;
     state.product.cart.forEach((value) => {
@@ -32,9 +34,22 @@ export default function Navigation() {
           <Nav.Link as={Link} to="/cart">
             <AiOutlineShoppingCart />({itemInCart})
           </Nav.Link>
-          <Nav.Link href="/">
+          <Dropdown align="end">
+            <Dropdown.Toggle variant="dark">
+              <BsGear />
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item as={Link} to="/management">
+                Management
+              </Dropdown.Item>
+              <Dropdown.Item href="/" disabled={!isLoggedIn}>
+                Logout
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+          {/* <Nav.Link href="/">
             <BsGear />
-          </Nav.Link>
+          </Nav.Link> */}
         </Nav>
       </Navbar>
     </div>
