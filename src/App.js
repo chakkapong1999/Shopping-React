@@ -4,6 +4,7 @@ import About from "./views/About";
 import HomePage from "./views/HomePage";
 import Cart from "./views/Cart";
 import Confirm from "./views/Confirm";
+import Management from "./views/Management";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/about" element={<About />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/management" element={<Management />} />
         <Route path="/confirm" element={<Confirm />} />
       </Routes>
     </div>

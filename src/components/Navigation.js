@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 export default function Navigation() {
   const user = useSelector((state) => state.user);
   const isLoggedIn = user.isLoggedIn;
+  const username = user.username;
   const itemInCart = useSelector((state) => {
     let total = 0;
     state.product.cart.forEach((value) => {
@@ -39,7 +40,11 @@ export default function Navigation() {
               <BsGear />
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item as={Link} to="/management">
+              <Dropdown.Item
+                as={Link}
+                to="/management"
+                disabled={username === "admin" ? false : true}
+              >
                 Management
               </Dropdown.Item>
               <Dropdown.Item href="/" disabled={!isLoggedIn}>

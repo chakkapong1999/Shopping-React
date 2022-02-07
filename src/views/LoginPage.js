@@ -87,14 +87,14 @@ export default function LoginPage() {
   return (
     <div>
       <Container className="center">
-        <div className="row align-items-center">
+        <div className="row align-items-center w-25">
           <Card>
             <h2 className="text-center mt-3 text-secondary">SHOPPING</h2>
             <Form>
               <Form.Group className="mb-3">
                 <Form.Control
                   type="text"
-                  placeholder="Enter Username"
+                  placeholder="Username"
                   onChange={handleUsernameLogin}
                   className="mt-3"
                 />
