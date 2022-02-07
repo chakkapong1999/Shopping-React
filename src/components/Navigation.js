@@ -6,12 +6,18 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function Navigation() {
-  const itemInCart = useSelector((state) => state.product.cart.length);
+  const itemInCart = useSelector((state) => {
+    let total = 0;
+    state.product.cart.forEach((value) => {
+      total += value.amount;
+    });
+    return total;
+  });
 
   return (
     <div>
-      <Navbar bg="dark" variant="dark" style={{paddingLeft: 20}}>
-        <Navbar.Brand as={Link} to="/">
+      <Navbar bg="dark" variant="dark" style={{ paddingLeft: 20 }}>
+        <Navbar.Brand as={Link} to="/home">
           SHOPPING
         </Navbar.Brand>
         <Nav className="me-auto">

@@ -1,10 +1,10 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { Button, Form, Container, Card, Modal } from "react-bootstrap";
 import "./LoginPage.css";
 import { api } from "../services/index";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setUsername, setToken, setIsLoggedIn } from "../stores/userStore"
+import { setUsername, setToken, setIsLoggedIn } from "../stores/userStore";
 
 export default function LoginPage() {
   const [usernameLogin, setUsernameLogin] = useState("");
@@ -37,8 +37,18 @@ export default function LoginPage() {
   };
 
   const closeModal = () => {
+    setUsernameRegister("");
+    setPasswordRegister("");
     setShow(false);
   };
+
+  const checkRegisterForm = useMemo(() => {
+    if (usernameRegister && passwordRegister) {
+      return false;
+    } else {
+      return true;
+    }
+  }, [passwordRegister, usernameRegister]);
 
   const handleLogin = useCallback(async () => {
     api
@@ -51,7 +61,7 @@ export default function LoginPage() {
           dispatch(setUsername(response.username));
           dispatch(setToken(response.token));
           dispatch(setIsLoggedIn(response.success));
-          navigate("/home", {replace: true})
+          navigate("/home", { replace: true });
         } else {
           alert("NOT SUCCESS");
         }
@@ -100,6 +110,10 @@ export default function LoginPage() {
               Login
             </Button>
             <div className="mt-3"></div>
+            <Button variant="info" onClick={() => navigate("/home")}>
+              Go Shopping
+            </Button>
+            <div className="mt-3"></div>
             <Button variant="primary" onClick={showModal}>
               Create Account
             </Button>
@@ -135,7 +149,11 @@ export default function LoginPage() {
           <Button variant="secondary" onClick={closeModal}>
             Cancel
           </Button>
-          <Button variant="success" onClick={handleCreateUser}>
+          <Button
+            variant="success"
+            onClick={handleCreateUser}
+            disabled={checkRegisterForm}
+          >
             Submit
           </Button>
         </Modal.Footer>

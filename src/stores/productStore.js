@@ -9,12 +9,14 @@ const productSlice = createSlice({
   initialState,
   reducers: {
     addProduct: (state, action) => {
-      // const itemToAdd = state.cart.find((value) => {
-      //   return value
-      // })
-      // console.log(itemToAdd.product)
-      // console.log(action.payload.product);
-      state.cart.push(action.payload);
+      const itemToAdd = state.cart.find((value) => {
+        return value.product.id === action.payload.product.id;
+      });
+      if (itemToAdd) {
+        itemToAdd.amount += 1;
+      } else {
+        state.cart.push(action.payload);
+      }
     },
     resetCart: (state) => {
       state.cart = [];
