@@ -15,7 +15,7 @@ export default function Item(props) {
   };
 
   return (
-    <div className="card w-100 h-100 mt-5">
+    <div className="card w-100 h-100 mt-5 text-center">
       <img src={props.data.image} className="card-img-top" alt="" />
       <div className="card-body">
         <h5 className="card-title">{props.data.name}</h5>

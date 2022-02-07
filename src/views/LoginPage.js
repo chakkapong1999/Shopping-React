@@ -89,6 +89,7 @@ export default function LoginPage() {
       <Container className="center">
         <div className="row align-items-center">
           <Card>
+            <h2 className="text-center mt-3 text-secondary">SHOPPING</h2>
             <Form>
               <Form.Group className="mb-3">
                 <Form.Control
