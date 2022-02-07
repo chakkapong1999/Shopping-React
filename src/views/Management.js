@@ -1,37 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Navigation from "../components/Navigation";
 import { api } from "../services/index";
-import {
-  Container,
-  Table,
-  ButtonGroup,
-  Button,
-  Modal,
-  Form,
-} from "react-bootstrap";
+import { Container, Table, ButtonGroup, Button } from "react-bootstrap";
 import { BsTrash, BsPencilFill, BsPlus } from "react-icons/bs";
+import ModalAddProduct from "../components/ModalAddProduct";
+import ModalEditProduct from "../components/ModalEditProduct";
 
 export default function Management() {
   const [products, setProducts] = useState([]);
 
-  const [showEdit, setShowEdit] = useState(false);
-
-  const [idEdit, setIdEdit] = useState(0);
-  const [nameEdit, setNameEdit] = useState("");
-  const [priceEdit, setPriceEdit] = useState(0);
-  const [imageEdit, setImageEdit] = useState(0);
-
-  const showModalEdit = (value) => {
-    setIdEdit(value.id);
-    setNameEdit(value.name);
-    setPriceEdit(value.price);
-    setImageEdit(value.image);
-    setShowEdit(true);
-  };
-
-  const closeModal = () => {
-    setShowEdit(false);
-  };
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
 
   const getProducts = () => {
     api.getProducts().then((response) => {
@@ -43,76 +22,14 @@ export default function Management() {
     getProducts();
   }, []);
 
-  const handleEditProduct = () => {
-    api
-      .updateProduct(idEdit, {
-        name: nameEdit,
-        price: priceEdit,
-        image: imageEdit,
-      })
-      .then((response) => {
-        if (response.success) {
-          alert("สำเร็จ");
-          closeModal();
-          getProducts();
-        } else {
-          alert("ไม่สำเร็จ");
-        }
-      });
-  };
-
-  const modalEdit = () => {
-    return (
-      <Modal show={showEdit} onHide={closeModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Product</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Name"
-                disabled
-                value={nameEdit}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Price</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Price"
-                value={priceEdit}
-                onChange={(e) => setPriceEdit(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Image URL</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Image URL"
-                value={imageEdit}
-                onChange={(e) => setImageEdit(e.target.value)}
-              />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="success" onClick={() => handleEditProduct()}>
-            Edit
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    );
-  };
-
   return (
     <div>
       <Navigation />
       <Container className="mt-5 mx-auto">
         <div align="right" className="mb-3">
-          <Button variant="success">Add Product</Button>
+          <Button variant="success" onClick={() => setShowAddModal(true)}>
+            Add Product
+          </Button>
         </div>
         <Table bordered>
           <thead>
@@ -136,7 +53,7 @@ export default function Management() {
                     <ButtonGroup>
                       <Button
                         variant="warning"
-                        onClick={() => showModalEdit(value)}
+                        onClick={() => setShowEditModal(true)}
                       >
                         <BsPencilFill />
                       </Button>
@@ -153,8 +70,9 @@ export default function Management() {
             })}
           </tbody>
         </Table>
-        {showEdit ? modalEdit() : null}
       </Container>
+      <ModalEditProduct show={showEditModal} closeModal={setShowEditModal} />
+      <ModalAddProduct show={showAddModal} closeModal={setShowAddModal} />
     </div>
   );
 }
