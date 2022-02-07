@@ -132,7 +132,7 @@ export default function LoginPage() {
             <Form.Group className="mb-3">
               <Form.Control
                 type="text"
-                placeholder="Enter Username"
+                placeholder="Username"
                 onChange={handleUsernameRegister}
                 className="mt-3"
               />
