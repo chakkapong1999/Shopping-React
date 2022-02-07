@@ -4,7 +4,7 @@ import "./LoginPage.css";
 import { api } from "../services/index";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setUsername, setToken, setIsLoggedIn } from "../stores/userStore";
+import { userActions } from "../stores/userStore";
 
 export default function LoginPage() {
   const [usernameLogin, setUsernameLogin] = useState("");
@@ -58,9 +58,9 @@ export default function LoginPage() {
       })
       .then((response) => {
         if (response.success) {
-          dispatch(setUsername(response.username));
-          dispatch(setToken(response.token));
-          dispatch(setIsLoggedIn(response.success));
+          dispatch(userActions.setUsername(response.username));
+          dispatch(userActions.setToken(response.token));
+          dispatch(userActions.setIsLoggedIn(response.success));
           navigate("/home", { replace: true });
         } else {
           alert("NOT SUCCESS");

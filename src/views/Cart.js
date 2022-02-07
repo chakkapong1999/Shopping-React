@@ -5,7 +5,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { Container, Table, Button } from "react-bootstrap";
 import { BsPlus } from "react-icons/bs";
 import { BiMinus } from "react-icons/bi";
-import { addProduct, removeItem } from "../stores/productStore";
+import { productActions } from "../stores/productStore";
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -23,11 +23,11 @@ export default function Cart() {
   });
 
   const handleAddItem = (data) => {
-    dispatch(addProduct(data));
+    dispatch(productActions.addProduct(data));
   };
 
   const handleRemoveItem = (data) => {
-    dispatch(removeItem(data));
+    dispatch(productActions.removeItem(data));
   };
 
   if (!isLoggedIn) {

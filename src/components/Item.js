@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import "./Item.css";
 import { useDispatch } from "react-redux";
-import { addProduct } from "../stores/productStore";
+import { productActions } from "../stores/productStore";
 
 export default function Item(props) {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ export default function Item(props) {
       product: data,
       amount: 1,
     };
-    dispatch(addProduct(item));
+    dispatch(productActions.addProduct(item));
   };
 
   return (
