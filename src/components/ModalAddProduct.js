@@ -25,6 +25,7 @@ export default function ModalAddProduct({ show, closeModal }) {
       .then((response) => {
         if (response.success) {
           alert("สำเร็จ");
+          closeModal(false)
         } else {
           alert("ไม่สำเร็จ");
         }
