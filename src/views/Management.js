@@ -108,8 +108,13 @@ export default function Management() {
         show={showEditModal}
         closeModal={setShowEditModal}
         product={editProduct}
+        setProducts={setProducts}
       />
-      <ModalAddProduct show={showAddModal} closeModal={setShowAddModal} />
+      <ModalAddProduct
+        show={showAddModal}
+        closeModal={setShowAddModal}
+        setProducts={setProducts}
+      />
       <ModalAddInventory
         show={showAddInventory}
         closeModal={setShowAddInventory}

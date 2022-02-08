@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { api } from "../services/index";
 
-export default function ModalAddProduct({ show, closeModal }) {
+export default function ModalAddProduct({ show, closeModal, setProducts }) {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
@@ -26,6 +26,9 @@ export default function ModalAddProduct({ show, closeModal }) {
         if (response.success) {
           alert("สำเร็จ");
           closeModal(false)
+          api.getProducts().then((response) => {
+            setProducts(response)
+          })
         } else {
           alert("ไม่สำเร็จ");
         }

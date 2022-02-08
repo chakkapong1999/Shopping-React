@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { api } from "../services/index";
 
-export default function ModalEditProduct({ show, closeModal, product }) {
+export default function ModalEditProduct({
+  show,
+  closeModal,
+  product,
+  setProducts,
+}) {
   const [productId, setProductId] = useState(0);
   const [productName, setProductName] = useState("");
   const [productPrice, setProductPrice] = useState(0);
@@ -26,6 +31,9 @@ export default function ModalEditProduct({ show, closeModal, product }) {
         if (response.success) {
           alert("แก้ไขสำเร็จ");
           closeModal(false);
+          api.getProducts().then((response) => {
+            setProducts(response);
+          });
         } else {
           alert("ไม่สำเร็จ");
         }
