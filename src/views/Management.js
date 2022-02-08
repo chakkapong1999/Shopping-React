@@ -4,7 +4,7 @@ import { api } from "../services/index";
 import { Container, Table, ButtonGroup, Button } from "react-bootstrap";
 import { BsTrash, BsPencilFill, BsPlus } from "react-icons/bs";
 import { useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import ModalAddProduct from "../components/ModalAddProduct";
 import ModalEditProduct from "../components/ModalEditProduct";
 import ModalAddInventory from "../components/ModalAddInventory";
