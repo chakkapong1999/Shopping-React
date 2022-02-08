@@ -41,7 +41,11 @@ export default function ModalAddInventory({ show, closeModal, inventory }) {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="success" onClick={handleAddInventory}>
+          <Button
+            variant="success"
+            onClick={handleAddInventory}
+            disabled={quantity ? false : true}
+          >
             Add
           </Button>
         </Modal.Footer>

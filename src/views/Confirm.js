@@ -65,6 +65,9 @@ export default function Confirm() {
                           ฿{value.product.price} x {value.amount}
                         </p>
                       </Col>
+                      <Col>
+                        <p>Total : ฿{value.product.price * value.amount}</p>
+                      </Col>
                     </Row>
                   </ListGroup.Item>
                 </div>

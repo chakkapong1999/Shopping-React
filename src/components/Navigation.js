@@ -52,9 +52,6 @@ export default function Navigation() {
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-          {/* <Nav.Link href="/">
-            <BsGear />
-          </Nav.Link> */}
         </Nav>
       </Navbar>
     </div>
