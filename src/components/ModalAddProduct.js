@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { api } from "../services/index";
 
@@ -6,6 +6,14 @@ export default function ModalAddProduct({ show, closeModal }) {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
+
+  const checkForm = useMemo(() => {
+    if (name && price && image) {
+      return false;
+    } else {
+      return true;
+    }
+  }, [image, name, price]);
 
   const handleAddProduct = () => {
     api
@@ -55,7 +63,11 @@ export default function ModalAddProduct({ show, closeModal }) {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="success" onClick={handleAddProduct}>
+          <Button
+            variant="success"
+            onClick={handleAddProduct}
+            disabled={checkForm}
+          >
             Add
           </Button>
         </Modal.Footer>

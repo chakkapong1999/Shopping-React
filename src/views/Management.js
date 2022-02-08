@@ -8,9 +8,21 @@ import ModalEditProduct from "../components/ModalEditProduct";
 
 export default function Management() {
   const [products, setProducts] = useState([]);
+  const [editProduct, setEditProduct] = useState([]);
 
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+
+  const handleDeleteProduct = (id) => {
+    api.deleteProduct(id).then((response) => {
+      if (response.success) {
+        alert("ลบสินค้าสำเร็จ");
+        getProducts();
+      } else {
+        alert("ไม่สำเร็จ");
+      }
+    });
+  };
 
   const getProducts = () => {
     api.getProducts().then((response) => {
@@ -53,11 +65,17 @@ export default function Management() {
                     <ButtonGroup>
                       <Button
                         variant="warning"
-                        onClick={() => setShowEditModal(true)}
+                        onClick={() => {
+                          setShowEditModal(true);
+                          setEditProduct(value);
+                        }}
                       >
                         <BsPencilFill />
                       </Button>
-                      <Button variant="danger">
+                      <Button
+                        variant="danger"
+                        onClick={() => handleDeleteProduct(value.id)}
+                      >
                         <BsTrash />
                       </Button>
                       <Button variant="secondary">
@@ -71,7 +89,11 @@ export default function Management() {
           </tbody>
         </Table>
       </Container>
-      <ModalEditProduct show={showEditModal} closeModal={setShowEditModal} />
+      <ModalEditProduct
+        show={showEditModal}
+        closeModal={setShowEditModal}
+        product={editProduct}
+      />
       <ModalAddProduct show={showAddModal} closeModal={setShowAddModal} />
     </div>
   );

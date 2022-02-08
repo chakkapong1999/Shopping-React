@@ -17,5 +17,6 @@ export const productAPI = {
     getProductsForPage,
     addProduct,
     updateProduct,
-    purchase
+    purchase,
+    deleteProduct
 }
