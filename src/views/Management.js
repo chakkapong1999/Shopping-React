@@ -5,13 +5,16 @@ import { Container, Table, ButtonGroup, Button } from "react-bootstrap";
 import { BsTrash, BsPencilFill, BsPlus } from "react-icons/bs";
 import ModalAddProduct from "../components/ModalAddProduct";
 import ModalEditProduct from "../components/ModalEditProduct";
+import ModalAddInventory from "../components/ModalAddInventory";
 
 export default function Management() {
   const [products, setProducts] = useState([]);
-  const [editProduct, setEditProduct] = useState([]);
+  const [editProduct, setEditProduct] = useState({});
+  const [inStock, setInStock] = useState({});
 
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showAddInventory, setShowAddInventory] = useState(false);
 
   const handleDeleteProduct = (id) => {
     api.deleteProduct(id).then((response) => {
@@ -21,6 +24,12 @@ export default function Management() {
       } else {
         alert("ไม่สำเร็จ");
       }
+    });
+  };
+
+  const getInventory = (id) => {
+    api.getInvertoryById(id).then((response) => {
+      setInStock(response);
     });
   };
 
@@ -78,7 +87,13 @@ export default function Management() {
                       >
                         <BsTrash />
                       </Button>
-                      <Button variant="secondary">
+                      <Button
+                        variant="secondary"
+                        onClick={() => {
+                          setShowAddInventory(true);
+                          getInventory(value.id);
+                        }}
+                      >
                         <BsPlus />
                       </Button>
                     </ButtonGroup>
@@ -95,6 +110,11 @@ export default function Management() {
         product={editProduct}
       />
       <ModalAddProduct show={showAddModal} closeModal={setShowAddModal} />
+      <ModalAddInventory
+        show={showAddInventory}
+        closeModal={setShowAddInventory}
+        inventory={inStock}
+      />
     </div>
   );
 }

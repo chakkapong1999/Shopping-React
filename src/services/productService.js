@@ -11,6 +11,8 @@ export const addProduct = (payload) => apiClient.post("/products", payload);
 export const updateProduct = (id,payload) => apiClient.put(`/products/${id}`,payload);
 export const deleteProduct = (id) => apiClient.delete(`/products/${id}`)
 export const purchase = (payload) => apiClient.post("/cart/confirm", payload);
+export const getInvertoryById = (id) => apiClient.get(`/cart/${id}`);
+export const addInventory = (payload) => apiClient.post(`/cart`,payload);
 
 export const productAPI = {
     getProducts,
@@ -18,5 +20,7 @@ export const productAPI = {
     addProduct,
     updateProduct,
     purchase,
-    deleteProduct
+    deleteProduct,
+    getInvertoryById,
+    addInventory
 }
