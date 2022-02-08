@@ -5,6 +5,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { api } from "../services/index";
 import { Button, Col, Container, ListGroup, Row } from "react-bootstrap";
 import { productActions } from "../stores/productStore";
+import { formatNumber } from "../utils/utils";
 
 export default function Confirm() {
   const navigate = useNavigate();
@@ -66,7 +67,10 @@ export default function Confirm() {
                         </p>
                       </Col>
                       <Col>
-                        <p>Total : ฿{value.product.price * value.amount}</p>
+                        <p>
+                          Total : ฿
+                          {formatNumber(value.product.price * value.amount)}
+                        </p>
                       </Col>
                     </Row>
                   </ListGroup.Item>
@@ -75,7 +79,7 @@ export default function Confirm() {
             })}
           </ListGroup>
           <Button variant="success" onClick={handlePurchase} className="mt-3">
-            ชำระเงิน ฿{totalPrice}
+            ชำระเงิน ฿{formatNumber(totalPrice)}
           </Button>
         </Container>
       </div>

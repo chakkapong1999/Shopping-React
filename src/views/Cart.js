@@ -6,6 +6,7 @@ import { Container, Table, Button } from "react-bootstrap";
 import { BsPlus } from "react-icons/bs";
 import { BiMinus } from "react-icons/bi";
 import { productActions } from "../stores/productStore";
+import { formatNumber } from "../utils/utils";
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -52,9 +53,9 @@ export default function Cart() {
                 return (
                   <tr key={value.product.id}>
                     <td>{value.product.name}</td>
-                    <td>฿{value.product.price}</td>
+                    <td>฿{formatNumber(value.product.price)}</td>
                     <td>{value.amount}</td>
-                    <td>฿{value.product.price * value.amount}</td>
+                    <td>฿{formatNumber(value.product.price * value.amount)}</td>
                     <td>
                       <Button
                         variant="danger"
@@ -75,7 +76,7 @@ export default function Cart() {
             </tbody>
           </Table>
           <Button variant="success" onClick={() => navigate("/confirm")}>
-            ยืนยันการชำระเงิน ฿{totalPrice}
+            ยืนยันการชำระเงิน ฿{formatNumber(totalPrice)}
           </Button>
         </Container>
       </div>
