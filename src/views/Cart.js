@@ -78,6 +78,9 @@ export default function Cart() {
           <Button variant="success" onClick={() => navigate("/confirm")}>
             ยืนยันการชำระเงิน ฿{formatNumber(totalPrice)}
           </Button>
+          <Button variant="danger" style={{ marginLeft: 10 }}>
+            เคลียร์ของในตะกร้า
+          </Button>
         </Container>
       </div>
     );
