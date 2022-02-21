@@ -1,6 +1,6 @@
 import ApiService from "./api";
 
-const URL = "http://localhost:8000";
+const URL = "http://localhost:8000/api";
 const apiClient = new ApiService({
     baseURL: URL
 })

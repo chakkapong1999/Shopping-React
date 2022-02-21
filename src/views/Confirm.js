@@ -26,7 +26,7 @@ export default function Confirm() {
     const confirmCart = [];
     itemInCart.forEach((element) => {
       confirmCart.push({
-        id: element.product.id,
+        id: element.product.productId,
         amount: element.amount,
       });
     });

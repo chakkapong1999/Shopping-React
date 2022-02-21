@@ -1,26 +1,30 @@
-import ApiService from "./api";
+import ApiService from './api';
 
-const URL = "http://localhost:8000";
+const URL = 'http://localhost:8000/api';
 const apiClient = new ApiService({
-    baseURL: URL
-})
+  baseURL: URL,
+});
 
-export const getProducts = () => apiClient.get("/products");
-export const getProductsForPage = (start,limit) => apiClient.get(`/products/page?start=${start}&limit=${limit}`);
-export const addProduct = (payload) => apiClient.post("/products", payload);
-export const updateProduct = (id,payload) => apiClient.put(`/products/${id}`,payload);
-export const deleteProduct = (id) => apiClient.delete(`/products/${id}`)
-export const purchase = (payload) => apiClient.post("/cart/confirm", payload);
-export const getInvertoryById = (id) => apiClient.get(`/cart/${id}`);
-export const addInventory = (payload) => apiClient.post(`/cart`,payload);
+export const getProducts = () => apiClient.get('/products');
+export const getProductsForPage = (current, limit) =>
+  apiClient.get(`/products/page?current=${current}&limit=${limit}`);
+export const addProduct = (payload) => apiClient.post('/products', payload);
+export const updateProduct = (payload) => apiClient.put('/products', payload);
+export const deleteProduct = (payload) =>
+  apiClient.post('/products/delete', payload);
+export const purchase = (payload) =>
+  apiClient.post('/inventory/confirm', payload);
+export const getInvertoryById = (id) => apiClient.get(`/inventory/${id}`);
+export const addInventory = (payload) =>
+  apiClient.post('/inventory/update', payload);
 
 export const productAPI = {
-    getProducts,
-    getProductsForPage,
-    addProduct,
-    updateProduct,
-    purchase,
-    deleteProduct,
-    getInvertoryById,
-    addInventory
-}
+  getProducts,
+  getProductsForPage,
+  addProduct,
+  updateProduct,
+  purchase,
+  deleteProduct,
+  getInvertoryById,
+  addInventory,
+};

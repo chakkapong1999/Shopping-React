@@ -22,7 +22,8 @@ export default function ModalEditProduct({
 
   const handleEditProduct = () => {
     api
-      .updateProduct(productId, {
+      .updateProduct({
+        productId: productId,
         name: productName,
         price: productPrice,
         image: productImage,

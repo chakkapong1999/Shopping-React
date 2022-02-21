@@ -1,7 +1,7 @@
 import axios from "axios";
 import { store } from "../stores/index"
 
-const URL = "http://localhost:8000";
+const URL = "http://localhost:8000/api";
 
 export default class ApiService {
   constructor({ baseURL = URL }) {
@@ -17,8 +17,11 @@ export default class ApiService {
   handleRequest(config) {
     const state = store.getState();
     const token = state.user.token
+    const username = state.user.username
     if (token) {
-      config.headers["Authorization"] = `Bearer ${token}`;
+      config.headers["Authorization"] = token;
+    } if (username) {
+      config.headers.User = username
     }
     return config;
   }

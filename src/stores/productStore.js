@@ -10,13 +10,13 @@ const productSlice = createSlice({
   reducers: {
     addProduct: (state, action) => {
       const itemToAdd = state.cart.find((value) => {
-        return value.product.id === action.payload.product.id;
+        return value.product.productId === action.payload.product.productId;
       });
       if (itemToAdd) {
         itemToAdd.amount += 1;
-      } else {
-        state.cart.push(action.payload);
+        return;
       }
+      state.cart.push(action.payload);
     },
     removeItem: (state, action) => {
       const removeItem = state.cart.find((value) => {
